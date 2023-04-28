@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-
+import { v4 as uuidv4 } from "uuid";
 export default function App() {
   const [slots, setSlots] = useState([]);
   const [startTime, setStartTime] = useState(0);
@@ -16,12 +16,19 @@ export default function App() {
     if (canAdd) {
       setSlots((pre) => [
         ...pre,
-        { start: startTime, end: endTime, name: name },
+        { start: startTime, end: endTime, name: name, id: uuidv4() },
       ]);
       setStartTime(0);
       setEndTime(0);
       setName("");
     }
+  }
+
+  function deleteSlot(id) {
+    setSlots((pre) => {
+      const deleted = pre.filter((slot) => slot.id !== id);
+      return deleted;
+    });
   }
 
   return (
@@ -32,12 +39,9 @@ export default function App() {
             "grid-row": `${Number(slot.start) + 1} / ${slot.end}`,
           };
           return (
-            <div
-              key={`${slot.start} ${slot.end}`}
-              className="slot"
-              style={mystyle}
-            >
+            <div key={slot.id} className="slot" style={mystyle}>
               {slot.start}:00 to {slot.end}:00 with {slot.name}
+              <button onClick={() => deleteSlot(slot.id)}>Delete</button>
             </div>
           );
         })}
