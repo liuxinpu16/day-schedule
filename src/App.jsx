@@ -36,7 +36,7 @@ export default function App() {
       <div className="timetable">
         {slots.map((slot) => {
           const mystyle = {
-            "grid-row": `${Number(slot.start) + 1} / ${slot.end}`,
+            "grid-row": `${Number(slot.start) + 1} / ${Number(slot.end) + 1}`,
           };
           return (
             <div key={slot.id} className="slot" style={mystyle}>
