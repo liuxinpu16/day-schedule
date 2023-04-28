@@ -1,0 +1,17 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.timetable {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(23, 1fr);
+  width: 500px;
+  height: 600px;
+  border: black solid 1px;
+}
+
+.slot {
+  border: solid;
+}
